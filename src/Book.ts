@@ -22,7 +22,7 @@ export class Book {
   }
 
   toString(): string {
-    return `cím: ${this.name} értékelés: ${this.rating}/10`;
+    return `cím: ${this.name} | értékelés: ${this.rating}/10`;
   }
 
 }

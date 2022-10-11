@@ -1,14 +1,49 @@
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
+import './teszt'
 import { Book } from './Book';
 
-let teszt_adat: Book[] = [];
 
-teszt_adat.push(new Book("SICP", 11))
-teszt_adat.push(new Book("asd", 5))
-teszt_adat.push(new Book("amongus", -20))
+let input_cim = (document.getElementById("input_cim") as HTMLInputElement);
+let input_rating = (document.getElementById("input_rating") as HTMLInputElement);
+let btn_hozzaad = (document.getElementById("btn_hozzaad") as HTMLButtonElement);
+let konyvek = (document.getElementById("konyvek") as HTMLDivElement);
 
-for (const b of teszt_adat) {
-  console.log(b.toString());
+function addKonyv(konyv: Book): void {
+  let konyvElem = document.createElement("div");
+  konyvElem.innerHTML =
+    `
+  <div>
+  <span class="fw-bold">Cím:</span> ${konyv.name}
+  <span class="fw-bold">Értékelés:</span> ${konyv.getRating()}/10
+  <span class="text-danger fw-bold" role="button" onclick="this.parentElement.remove();">X</span>
+  </div>
+  `;
+  konyvek.appendChild(konyvElem);
+
 }
+
+function init(): void {
+
+  addKonyv(new Book("SICP", 10));
+
+  btn_hozzaad.addEventListener("click", () => {
+
+    if (input_cim.value == "" || input_rating.value == "") {
+      return;
+    }
+
+    let rating: number = parseFloat(input_rating.value);
+    // lekerekítjük 1 tizedesjegyre
+    rating = parseFloat(rating.toFixed(1));
+    addKonyv(new Book(input_cim.value, rating))
+
+    input_cim.value = "";
+    input_rating.value = "";
+
+  })
+
+}
+
+init();
