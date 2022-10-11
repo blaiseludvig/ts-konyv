@@ -1,9 +1,14 @@
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
+import { Book } from './Book';
 
-let element: HTMLHeadingElement = document.createElement('h1');
-element.textContent = "Ha ezt látod, és zöld, akkor működik!";
-// a text-success egy bootstrapes stílus
-element.className = "text-success";
-document.body.append(element);
+let teszt_adat: Book[] = [];
+
+teszt_adat.push(new Book("SICP", 11))
+teszt_adat.push(new Book("asd", 5))
+teszt_adat.push(new Book("amongus", -20))
+
+for (const b of teszt_adat) {
+  console.log(b.toString());
+}
